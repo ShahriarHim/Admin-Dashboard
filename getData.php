@@ -1,35 +1,23 @@
 <?php
 include 'dbConfig.php';
-$sql = "SELECT * FROM environmental_data ORDER BY Timestamp DESC LIMIT 5"; // Adjust the query as needed
+
+// Fetch the last 3 records from the database
+$sql = "SELECT * FROM environmental_data ORDER BY timestamp DESC LIMIT 3";
 $result = $conn->query($sql);
 
-$data = [];
+$t_data = $h_data = $p_data = [];
 
-if ($result) {
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $temperature = isset($row['temperature']) ? $row['temperature'] : null;
-            $humidity = isset($row['humidity']) ? $row['humidity'] : null;
-            $pressure = isset($row['pressure']) ? $row['pressure'] : null;
-
-            $data[] = [
-                'Temperature' => $temperature,
-                'Humidity' => $humidity,
-                'Pressure' => $pressure,
-            ];
-        }
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        // Populate arrays with data
+        $t_data[] = $row['temperature'];
+        $h_data[] = $row['humidity'];
+        $p_data[] = $row['pressure'];
     }
-} else {
-    // Handle query error
-    die("Query failed: " . $conn->error);
 }
-
-
 
 // Close the database connection
 $conn->close();
 
-// Send JSON response
-header('Content-Type: application/json');
-echo json_encode($data);
+// Now $t_data, $h_data, and $p_data contain the last 3 records for temperature, humidity, and pressure respectively.
 ?>

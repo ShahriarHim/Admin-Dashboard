@@ -8,33 +8,73 @@ var barChart = new Chart(ctxBarChart, {
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
-            data: [25.5, 26.8, 24.2]
+            data: [76, -10, 42]
         }, {
             label: 'Humidity (%)',
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1,
-            data: [60.2, 58.5, 62.0]
+            data: [82, 105, 38]
         }, {
             label: 'Pressure (hPa)',
             backgroundColor: 'rgba(255, 205, 86, 0.2)',
             borderColor: 'rgba(255, 205, 86, 1)',
             borderWidth: 1,
-            data: [1013.5, 1014.2, 1012.8]
+            data: [1175, 1059, 1272]
         }]
     }
 });
 
 
 
+var ctxLineChart = document.getElementById('lineChart').getContext('2d');
+var lineChart = new Chart(ctxLineChart, {
+    type: 'line',
+    data: {
+        labels: ['Sample 1', 'Sample 2', 'Sample 3'],
+        datasets: [{
+            label: 'Temperature (°C)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+            data: [76, -10, 42]
+        }, {
+            label: 'Soil Moisture (%)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1,
+            data: [36, 40, 71]
+        }, {
+            label: 'Soil Nutrients (%)',
+            backgroundColor: 'rgba(255, 205, 86, 0.2)',
+            borderColor: 'rgba(255, 205, 86, 1)',
+            borderWidth: 1,
+            data: [41, 10, 72]
+        }]
+    }
+});
+
+var ctxPieChart = document.getElementById('pieChart').getContext('2d');
+var pieChart = new Chart(ctxPieChart, {
+    type: 'pie',
+    data: {
+        labels: ['Temperature (°C)', 'Humidity (%)', 'Pressure (hPa)'],
+        datasets: [{
+            data: [76, 82, 1175],
+            backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(255, 205, 86, 0.6)'],
+            borderWidth: 0
+        }]
+    }
+});
 
 
-var ctxGaugeChart = document.getElementById('gaugeChart').getContext('2d');
-var gaugeChart = new Chart(ctxGaugeChart, {
+var ctxDoughnutChart = document.getElementById('doughnutChart').getContext('2d');
+var doughnutChart = new Chart(ctxDoughnutChart, {
     type: 'doughnut',
     data: {
+        labels: ['Temperature (°C)', 'Soil Moisture (%)', 'Soil Nutrients (%)'],
         datasets: [{
-            data: [40.0, 35.5, 42.3],
+            data: [1175, 36, 41],
             backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(255, 205, 86, 0.6)'],
             borderWidth: 0
         }]
@@ -43,18 +83,74 @@ var gaugeChart = new Chart(ctxGaugeChart, {
         cutoutPercentage: 70
     }
 });
-var ctxPieChart = document.getElementById('pieChart').getContext('2d');
-var pieChart = new Chart(ctxPieChart, {
-    type: 'pie',
-    data: {
-        labels: ['Sample 1', 'Sample 2', 'Sample 3'],
-        datasets: [{
-            data: [25.0, 28.0, 22.5],
-            backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(255, 205, 86, 0.6)'],
-            borderWidth: 0
-        }]
-    }
-});
+
+
+
+
+
+
+
+// Assuming you have already included jQuery in your project
+
+// Bar Chart
+// var ctxBarChart = document.getElementById('barChart').getContext('2d');
+// var barChart;
+
+// // Function to update chart data
+// function updateChartData(t_data, h_data, p_data) {
+//     barChart.data.datasets[0].data = t_data;
+//     barChart.data.datasets[1].data = h_data;
+//     barChart.data.datasets[2].data = p_data;
+//     barChart.update();
+// }
+
+// // AJAX request to fetch data from getData.php
+// $.ajax({
+//     url: 'getData.php',
+//     method: 'GET',
+//     dataType: 'json',
+//     success: function (data) {
+//         var t_data = data.t_data;
+//         var h_data = data.h_data;
+//         var p_data = data.p_data;
+
+//         // Create Bar Chart
+//         barChart = new Chart(ctxBarChart, {
+//             type: 'bar',
+//             data: {
+//                 labels: ['Sample 1', 'Sample 2', 'Sample 3'],
+//                 datasets: [{
+//                     label: 'Temperature (°C)',
+//                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
+//                     borderColor: 'rgba(75, 192, 192, 1)',
+//                     borderWidth: 1,
+//                     data: t_data
+//                 }, {
+//                     label: 'Humidity (%)',
+//                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
+//                     borderColor: 'rgba(255, 99, 132, 1)',
+//                     borderWidth: 1,
+//                     data: h_data
+//                 }, {
+//                     label: 'Pressure (hPa)',
+//                     backgroundColor: 'rgba(255, 205, 86, 0.2)',
+//                     borderColor: 'rgba(255, 205, 86, 1)',
+//                     borderWidth: 1,
+//                     data: p_data
+//                 }]
+//             }
+//         });
+//     },
+//     error: function (xhr, status, error) {
+//         console.error('Error fetching data:', error);
+//     }
+// });
+
+// Similar AJAX requests and chart creation can be done for other charts
+
+
+
+
 // document.addEventListener("DOMContentLoaded", function () {
 //     let temperatureValues = [];
 //     let humidityValues = [];

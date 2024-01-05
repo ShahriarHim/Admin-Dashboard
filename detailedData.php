@@ -36,7 +36,9 @@ $conn->close();
   <!-- inject:css -->
   <link rel="stylesheet" href="./css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="./images/favicon.png" />
+  <link rel="shortcut icon" href="./images/logo1_mini.png" />
+  <script src="./js/raphael-2.1.4.min.js"></script>
+  <script src="./js/justGage.js"></script>
 </head>
 
 <body>
@@ -45,8 +47,8 @@ $conn->close();
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="navbar-brand-wrapper d-flex justify-content-center">
         <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-          <a class="navbar-brand brand-logo" href="http://localhost/My%20Dashboard/Backend/index.php"><img src="./images/logo1.png" alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href="http://localhost/My%20Dashboard/Backend/index.php"><img src="./images/logo1_mini.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="http://localhost/Admin%20Panel/Admin%20Dashboard/index.php"><img src="./images/logo1.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="http://localhost/Admin%20Panel/Admin%20Dashboard/index.php"><img src="./images/logo1_mini.png" alt="logo" /></a>
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="typcn typcn-th-menu"></span>
           </button>
@@ -356,14 +358,14 @@ $conn->close();
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost/My%20Dashboard/Backend/index.php">
+            <a class="nav-link" href="http://localhost/Admin%20Panel/Admin%20Dashboard/index.php">
               <i class="typcn typcn-user-outline menu-icon"></i>
               <span class="menu-title">Profile</span>
               <div class="badge badge-danger">new</div>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost/My%20Dashboard/Backend/charts.html">
+            <a class="nav-link" href="http://localhost/Admin%20Panel/Admin%20Dashboard/charts.html">
               <i class="typcn typcn-device-desktop menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -376,7 +378,7 @@ $conn->close();
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="http://localhost/My%20Dashboard/Backend/detailedData.php">Detailed Data</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/Admin%20Panel/Admin%20Dashboard/detailedData.php">Detailed Data</a></li>
               </ul>
             </div>
           </li>
@@ -388,7 +390,7 @@ $conn->close();
             </a>
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="http://localhost/My%20Dashboard/Backend/table.php">Data table</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/Admin%20Panel/Admin%20Dashboard/table.php">Data table</a></li>
               </ul>
             </div>
           </li>
@@ -419,8 +421,6 @@ $conn->close();
                 <div class="card-body">
                   <h4 class="card-title">Updated Temperature</h4>
                   <div id="temperatureGauge" class="200x160px"></div>
-                  <script src="raphael-2.1.4.min.js"></script>
-                  <script src="justGage.js"></script>
                   <script>
                     var g = new JustGage({
                       id: "temperatureGauge",
@@ -440,8 +440,6 @@ $conn->close();
                 <div class="card-body">
                   <h4 class="card-title">Updated Humidity</h4>
                   <div id="humidityGauge" class="200x160px"></div>
-                  <script src="raphael-2.1.4.min.js"></script>
-                  <script src="justGage.js"></script>
                   <script>
                     var g = new JustGage({
                       id: "humidityGauge",
@@ -459,8 +457,6 @@ $conn->close();
                 <div class="card-body">
                   <h4 class="card-title">Updated Pressure</h4>
                   <div id="pressureGauge" class="200x160px"></div>
-                  <script src="raphael-2.1.4.min.js"></script>
-                  <script src="justGage.js"></script>
                   <script>
                     var g = new JustGage({
                       id: "pressureGauge",
@@ -480,8 +476,6 @@ $conn->close();
                 <div class="card-body">
                   <h4 class="card-title">Updated Soil Moisture</h4>
                   <div id="soilMoistureGauge" class="200x160px"></div>
-                  <script src="raphael-2.1.4.min.js"></script>
-                  <script src="justGage.js"></script>
                   <script>
                     var g = new JustGage({
                       id: "soilMoistureGauge",
@@ -499,8 +493,6 @@ $conn->close();
                 <div class="card-body">
                   <h4 class="card-title">Updated Soil Nutrients</h4>
                   <div id="soilNutrientsGauge" class="200x160px"></div>
-                  <script src="raphael-2.1.4.min.js"></script>
-                  <script src="justGage.js"></script>
                   <script>
                     var g = new JustGage({
                       id: "soilNutrientsGauge",
@@ -548,9 +540,8 @@ $conn->close();
   <script src="./vendors/chart.js/Chart.min.js"></script>
   <!-- End plugin js for this page -->
   <!-- Custom js for this page-->
-  <!-- <script src="./js/chart.js"></script> -->
   <!-- End custom js for this page-->
-  <script src="./main.php"></script>
+
 </body>
 
 </html>
