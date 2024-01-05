@@ -22,27 +22,39 @@ function generateDummyData()
 }
 
 // Handle user input to start/stop data insertion
-if (isset($_POST['startInsertion'])) {
-    $message = 'Generating dummy data in every 30s....';
+if (isset($_POST['action'])) {
+    if ($_POST['action'] === 'start') {
+        $message = 'Generating dummy data every 30s...';
 
-    // Insert new data immediately
-    $data = generateDummyData();
-    $sql = "INSERT INTO environmental_data (temperature, humidity, pressure, soil_moisture, soil_nutrients) 
-            VALUES ('{$data['temperature']}', '{$data['humidity']}', '{$data['pressure']}', '{$data['soil_moisture']}', '{$data['soil_nutrients']}')";
+        while (true) {
+            if (isset($_POST['stopInsertion'])) {
+                break;
+            }
 
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "\n" . $conn->error;
+            $data = generateDummyData();
+            $sql = "INSERT INTO environmental_data (temperature, humidity, pressure, soil_moisture, soil_nutrients) 
+                    VALUES ('{$data['temperature']}', '{$data['humidity']}', '{$data['pressure']}', '{$data['soil_moisture']}', '{$data['soil_nutrients']}')";
+
+            if ($conn->query($sql) === TRUE) {
+                echo json_encode(['status' => 'success', 'message' => 'New record created successfully']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Error: ' . $sql . "\n" . $conn->error]);
+            }
+
+            // Sleep for 30 seconds
+            sleep(30);
+        }
+    } elseif ($_POST['action'] === 'stop') {
+        echo json_encode(['status' => 'stopped', 'message' => 'Data insertion stopped!']);
     }
-} elseif (isset($_POST['stopInsertion'])) {
-    // Handle stop insertion
-    echo "Data insertion stopped!";
+
+    exit;
 }
 
 // Close the database connection
 $conn->close();
 ?>
+
 
 
 <!DOCTYPE html>

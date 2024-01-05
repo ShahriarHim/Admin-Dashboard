@@ -412,48 +412,20 @@ $conn->close();
                   </h4>
 
                   <script>
-                    // Function to start data insertion
                     function startDataInsertion() {
-                      // Display a loading message
                       $('.card-title').append('<span class="text-info ml-2">Generating new data...</span>');
 
-                      // Trigger the asynchronous request to start data insertion
                       $.ajax({
                         url: 'setData.php',
                         type: 'POST',
                         data: {
-                          startInsertion: true
+                          action: 'start'
                         },
+                        dataType: 'json',
                         success: function(response) {
-                          // Show the stop button and hide the insert button
-                          $('#insertDataBtn').addClass('d-none');
-                          $('#stopDataBtn').removeClass('d-none');
-
-                          // You can update the table here if needed
                           console.log(response);
-                        },
-                        error: function(error) {
-                          console.error(error);
-                        }
-                      });
-                    }
 
-                    // Function to stop data insertion
-                    function stopDataInsertion() {
-                      // Trigger the asynchronous request to stop data insertion
-                      $.ajax({
-                        url: 'setData.php',
-                        type: 'POST',
-                        data: {
-                          stopInsertion: true
-                        },
-                        success: function(response) {
-                          // Hide the stop button and show the insert button
-                          $('#stopDataBtn').addClass('d-none');
-                          $('#insertDataBtn').removeClass('d-none');
-
-                          // You can handle the response if needed
-                          console.log(response);
+                          // You can update the UI here if needed
 
                           // Remove the loading message
                           $('.card-title .text-info').remove();
@@ -464,18 +436,41 @@ $conn->close();
                       });
                     }
 
-                    // Attach click event to the insert button
+                    function stopDataInsertion() {
+                      $.ajax({
+                        url: 'setData.php',
+                        type: 'POST',
+                        data: {
+                          action: 'stop'
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                          console.log(response);
+
+                          // Update the UI or perform any other actions on stop
+
+                          // Remove the loading message
+                          $('.card-title .text-info').remove();
+                        },
+                        error: function(error) {
+                          console.error(error);
+                        }
+                      });
+                    }
+
                     $('#insertDataBtn').click(function() {
-                      // Start data insertion
                       startDataInsertion();
+                      $('#insertDataBtn').addClass('d-none');
+                      $('#stopDataBtn').removeClass('d-none');
                     });
 
-                    // Attach click event to the stop button
                     $('#stopDataBtn').click(function() {
-                      // Stop data insertion
                       stopDataInsertion();
+                      $('#stopDataBtn').addClass('d-none');
+                      $('#insertDataBtn').removeClass('d-none');
                     });
                   </script>
+
 
 
                   <p class="card-description">
