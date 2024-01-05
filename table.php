@@ -412,6 +412,8 @@ $conn->close();
                   </h4>
 
                   <script>
+                    var intervalId;
+
                     function startDataInsertion() {
                       $('.card-title').append('<span class="text-info ml-2">Generating new data...</span>');
 
@@ -429,6 +431,32 @@ $conn->close();
 
                           // Remove the loading message
                           $('.card-title .text-info').remove();
+
+                          // Start data insertion at intervals
+                          intervalId = setInterval(function() {
+                            $.ajax({
+                              url: 'setData.php',
+                              type: 'POST',
+                              data: {
+                                action: 'start'
+                              },
+                              dataType: 'json',
+                              success: function(response) {
+                                console.log(response);
+
+                                // You can update the UI here if needed
+
+                                if (response.status === 'stopped') {
+                                  clearInterval(intervalId);
+                                  $('#insertDataBtn').removeClass('d-none');
+                                  $('#stopDataBtn').addClass('d-none');
+                                }
+                              },
+                              error: function(error) {
+                                console.error(error);
+                              }
+                            });
+                          }, 30000); // 30 seconds
                         },
                         error: function(error) {
                           console.error(error);
@@ -468,8 +496,10 @@ $conn->close();
                       stopDataInsertion();
                       $('#stopDataBtn').addClass('d-none');
                       $('#insertDataBtn').removeClass('d-none');
+                      clearInterval(intervalId);
                     });
                   </script>
+
 
 
 

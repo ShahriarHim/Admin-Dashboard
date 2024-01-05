@@ -25,10 +25,15 @@ function generateDummyData()
 if (isset($_POST['action'])) {
     if ($_POST['action'] === 'start') {
         $message = 'Generating dummy data every 30s...';
+        echo json_encode(['status' => 'success', 'message' => $message]);
 
-        while (true) {
+        // Start data insertion at intervals
+        $interval = 30; // 30 seconds
+        $iterations = 5; // Modify this to control the number of iterations
+        for ($i = 0; $i < $iterations; $i++) {
             if (isset($_POST['stopInsertion'])) {
-                break;
+                echo json_encode(['status' => 'stopped', 'message' => 'Data insertion stopped!']);
+                exit;
             }
 
             $data = generateDummyData();
@@ -41,8 +46,8 @@ if (isset($_POST['action'])) {
                 echo json_encode(['status' => 'error', 'message' => 'Error: ' . $sql . "\n" . $conn->error]);
             }
 
-            // Sleep for 30 seconds
-            sleep(30);
+            // Sleep for the specified interval
+            sleep($interval);
         }
     } elseif ($_POST['action'] === 'stop') {
         echo json_encode(['status' => 'stopped', 'message' => 'Data insertion stopped!']);
@@ -54,6 +59,8 @@ if (isset($_POST['action'])) {
 // Close the database connection
 $conn->close();
 ?>
+
+
 
 
 
